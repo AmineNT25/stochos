@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="https://raw.githubusercontent.com/AmineNT25/stochos/main/public/banner.png" alt="Stochos Banner" width="100%" />
+<img src="https://raw.githubusercontent.com/AmineNT25/stochos/main/public/logstochos.png" alt="Stochos" width="180" />
 
 <br/>
 
@@ -95,9 +95,9 @@
 
 <div align="center">
 
-| Dashboard | Profile | Admin |
+| Dashboard | Profile | Admin Panel |
 |---|---|---|
-| ![Dashboard](https://placehold.co/380x220/1a1a2e/fb923c?text=Dashboard) | ![Profile](https://placehold.co/380x220/1a1a2e/fb923c?text=Profile) | ![Admin](https://placehold.co/380x220/1a1a2e/fb923c?text=Admin+Panel) |
+| ![Dashboard](https://raw.githubusercontent.com/AmineNT25/stochos/main/public/screenshots/dashboard.png) | ![Profile](https://raw.githubusercontent.com/AmineNT25/stochos/main/public/screenshots/profile.png) | ![Admin](https://raw.githubusercontent.com/AmineNT25/stochos/main/public/screenshots/admin.png) |
 
 </div>
 
