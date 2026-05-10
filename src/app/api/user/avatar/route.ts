@@ -2,6 +2,8 @@ import { NextResponse } from 'next/server';
 import { auth } from '@/auth';
 import { sql } from '@/lib/db';
 
+export const dynamic = 'force-dynamic';
+
 const MAX_BYTES = 200_000; // ~150 KB image → ~200 KB base64
 
 export async function PATCH(req: Request) {

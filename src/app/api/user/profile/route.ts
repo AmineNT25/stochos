@@ -3,6 +3,8 @@ import { auth } from '@/auth';
 import { sql } from '@/lib/db';
 import bcrypt from 'bcryptjs';
 
+export const dynamic = 'force-dynamic';
+
 export async function PATCH(req: Request) {
   const session = await auth();
   if (!session?.user?.id) {

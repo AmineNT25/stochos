@@ -2,6 +2,8 @@ import { NextResponse } from 'next/server';
 import { auth } from '@/auth';
 import { sql } from '@/lib/db';
 
+export const dynamic = 'force-dynamic';
+
 async function requireAdmin() {
   const session = await auth();
   if (!session?.user) return null;
