@@ -1,0 +1,69 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ── Light theme (default / :root) ── */
+:root {
+  --background: #f4f4f8;
+  --foreground: #0a0a14;
+  --card: #ffffff;
+  --card-foreground: #0a0a14;
+  --primary: #f97316;
+  --primary-foreground: #ffffff;
+  --secondary: #e9e9f0;
+  --secondary-foreground: #0a0a14;
+  --muted: #e9e9f0;
+  --muted-foreground: #6b7280;
+  --accent: #e2e2ed;
+  --accent-foreground: #0a0a14;
+  --border: #d4d4e0;
+  --surface: #ffffff;
+  --surface-2: #ededf5;
+  --nav-bg: #ffffff;
+  --nav-border: #e0e0ec;
+  --radius: 0.625rem;
+}
+
+/* ── Dark theme ── */
+.dark {
+  --background: #07070f;
+  --foreground: #ffffff;
+  --card: #0f0f1a;
+  --card-foreground: #ffffff;
+  --primary: #f97316;
+  --primary-foreground: #ffffff;
+  --secondary: #1a1a2e;
+  --secondary-foreground: #ffffff;
+  --muted: #1a1a2e;
+  --muted-foreground: #6b7280;
+  --accent: #2a2a3e;
+  --accent-foreground: #ffffff;
+  --border: #1a1a2e;
+  --surface: #0f0f1a;
+  --surface-2: #1a1a2e;
+  --nav-bg: #0d0d1a;
+  --nav-border: #1a1a2e;
+  --radius: 0.625rem;
+}
+
+@layer base {
+  * {
+    @apply border-border;
+    box-sizing: border-box;
+  }
+
+  body {
+    background-color: var(--background);
+    color: var(--foreground);
+    transition: background-color 0.2s ease, color 0.2s ease;
+  }
+
+  html {
+    font-size: 16px;
+  }
+
+  input::placeholder {
+    color: var(--muted-foreground);
+    opacity: 0.6;
+  }
+}
