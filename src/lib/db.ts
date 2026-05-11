@@ -4,9 +4,9 @@ function getDb() {
   const raw = process.env.DATABASE_URL;
   if (!raw) throw new Error('DATABASE_URL is not set');
 
-  // channel_binding=require is TCP-only — unsupported by neon serverless (HTTP/WS).
   const url = raw
-    .replace(/&channel_binding=[^&]*/g, '')
+    .replace(/^﻿/, '')                    // strip BOM if copy-pasted from some editors
+    .replace(/&channel_binding=[^&]*/g, '')    // strip TCP-only param unsupported by neon serverless
     .replace(/\?channel_binding=[^&]*&/, '?')
     .replace(/\?channel_binding=[^&]*$/, '');
 
