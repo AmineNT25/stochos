@@ -1,11 +1,15 @@
 import { neon } from '@neondatabase/serverless';
 
 function getDb() {
-  // channel_binding=require is a TCP-level feature unsupported by the neon
-  // serverless driver (HTTP/WebSocket). Strip it so production doesn't break.
-  const url = (process.env.DATABASE_URL ?? '').replace(/[?&]channel_binding=[^&]*/g, (m) =>
-    m.startsWith('?') ? '?' : ''
-  ).replace(/\?$/, '');
+  const raw = process.env.DATABASE_URL;
+  if (!raw) throw new Error('DATABASE_URL is not set');
+
+  // channel_binding=require is TCP-only — unsupported by neon serverless (HTTP/WS).
+  const url = raw
+    .replace(/&channel_binding=[^&]*/g, '')
+    .replace(/\?channel_binding=[^&]*&/, '?')
+    .replace(/\?channel_binding=[^&]*$/, '');
+
   return neon(url);
 }
 

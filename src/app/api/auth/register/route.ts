@@ -45,7 +45,8 @@ export async function POST(req: Request) {
 
     return NextResponse.json({ success: true });
   } catch (err) {
-    console.error('[register]', err);
+    const msg = err instanceof Error ? err.message : String(err);
+    console.error('[register] ERROR:', msg);
     return NextResponse.json({ error: 'Something went wrong' }, { status: 500 });
   }
 }
