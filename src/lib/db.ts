@@ -4,9 +4,10 @@ function getDb() {
   const raw = process.env.DATABASE_URL;
   if (!raw) throw new Error('DATABASE_URL is not set');
 
-  const url = raw
-    .replace(/^﻿/, '')                    // strip BOM if copy-pasted from some editors
-    .replace(/&channel_binding=[^&]*/g, '')    // strip TCP-only param unsupported by neon serverless
+  // Remove BOM (U+FEFF) and channel_binding (TCP-only, unsupported by neon serverless)
+  let url = raw.charCodeAt(0) === 0xFEFF ? raw.slice(1) : raw;
+  url = url
+    .replace(/&channel_binding=[^&]*/g, '')
     .replace(/\?channel_binding=[^&]*&/, '?')
     .replace(/\?channel_binding=[^&]*$/, '');
 
