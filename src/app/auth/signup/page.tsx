@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import Link from 'next/link';
+import { Eye, EyeOff } from 'lucide-react';
 
 export default function SignUpPage() {
   const [name, setName] = useState('');
@@ -11,6 +12,7 @@ export default function SignUpPage() {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
   const router = useRouter();
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -92,18 +94,29 @@ export default function SignUpPage() {
 
           <div className="flex flex-col gap-1.5">
             <label className="text-xs font-medium" style={{ color: 'rgba(196,181,253,0.7)' }}>Password</label>
-            <input
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              placeholder="Min. 8 characters"
-              required
-              minLength={8}
-              className="w-full px-4 py-3 rounded-xl text-sm text-white outline-none transition-all"
-              style={{ background: 'rgba(124,58,237,0.08)', border: '1px solid rgba(124,58,237,0.2)' }}
-              onFocus={(e) => (e.target.style.border = '1px solid rgba(124,58,237,0.6)')}
-              onBlur={(e) => (e.target.style.border = '1px solid rgba(124,58,237,0.2)')}
-            />
+            <div className="relative">
+              <input
+                type={showPassword ? 'text' : 'password'}
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                placeholder="Min. 8 characters"
+                required
+                minLength={8}
+                className="w-full px-4 py-3 pr-11 rounded-xl text-sm text-white outline-none transition-all"
+                style={{ background: 'rgba(124,58,237,0.08)', border: '1px solid rgba(124,58,237,0.2)' }}
+                onFocus={(e) => (e.target.style.border = '1px solid rgba(124,58,237,0.6)')}
+                onBlur={(e) => (e.target.style.border = '1px solid rgba(124,58,237,0.2)')}
+              />
+              <button
+                type="button"
+                onClick={() => setShowPassword((v) => !v)}
+                className="absolute right-3 top-1/2 -translate-y-1/2 transition-colors"
+                style={{ color: 'rgba(196,181,253,0.5)' }}
+                tabIndex={-1}
+              >
+                {showPassword ? <EyeOff size={16} /> : <Eye size={16} />}
+              </button>
+            </div>
           </div>
 
           {error && (
