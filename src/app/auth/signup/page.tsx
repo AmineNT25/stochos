@@ -11,6 +11,7 @@ export default function SignUpPage() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+  const [emailConflict, setEmailConflict] = useState(false);
   const [loading, setLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const router = useRouter();
@@ -18,6 +19,7 @@ export default function SignUpPage() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError('');
+    setEmailConflict(false);
     setLoading(true);
 
     const res = await fetch('/api/auth/register', {
@@ -29,7 +31,12 @@ export default function SignUpPage() {
     const data = await res.json();
 
     if (!res.ok) {
-      setError(data.error || 'Registration failed.');
+      if (res.status === 409) {
+        setEmailConflict(true);
+        setError('This email is already registered. Please sign in or use a different email.');
+      } else {
+        setError(data.error || 'Registration failed.');
+      }
       setLoading(false);
     } else {
       router.push('/auth/signin?registered=1');
@@ -120,9 +127,17 @@ export default function SignUpPage() {
           </div>
 
           {error && (
-            <p className="text-xs text-center px-3 py-2 rounded-lg" style={{ background: 'rgba(239,68,68,0.1)', color: '#f87171', border: '1px solid rgba(239,68,68,0.2)' }}>
-              {error}
-            </p>
+            <div className="flex flex-col gap-1.5 px-3 py-2 rounded-lg text-xs text-center" style={{ background: 'rgba(239,68,68,0.1)', border: '1px solid rgba(239,68,68,0.2)' }}>
+              <p style={{ color: '#f87171' }}>{error}</p>
+              {emailConflict && (
+                <Link href="/auth/signin" className="font-medium transition-colors" style={{ color: '#c084fc' }}
+                  onMouseEnter={(e) => (e.currentTarget.style.color = '#e9d5ff')}
+                  onMouseLeave={(e) => (e.currentTarget.style.color = '#c084fc')}
+                >
+                  Sign in instead →
+                </Link>
+              )}
+            </div>
           )}
 
           <button
